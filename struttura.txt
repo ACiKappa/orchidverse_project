@@ -1,0 +1,18 @@
+OrchidVerse/
+├── orchid_verse/           ← orchidee, eventi, admin
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── templates/orchid_verse/
+│   └── serializers.py
+├── weather_service/        ← meteo, consigli, API esterne
+│   ├── models.py           ← se salvi snapshot meteo
+│   ├── views.py            ← consigli, analisi
+│   ├── urls.py
+│   ├── templates/weather_service/
+│   └── services.py         ← logica meteo
+├── api/                    ← Django REST API
+│   ├── views.py
+│   ├── urls.py
+│   ├── serializers.py
+│   └── permissions.py

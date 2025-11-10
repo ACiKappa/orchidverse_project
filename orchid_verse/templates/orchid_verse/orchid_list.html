@@ -1,0 +1,19 @@
+{% extends 'orchid_verse/base.html' %}
+
+{% block title %}Le tue orchidee{% endblock %}
+
+{% block content %}
+  <h2>Le tue orchidee coltivate 🌿</h2>
+  <ul>
+    {% for orchid in orchids %}
+      <li>
+        {{ orchid.nickname }} - {{ orchid.species.full_name }}
+        {% if orchid.photo %}
+          <br><img src="{{ orchid.photo.url }}" alt="Foto" style="height: 150px;">
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>Nessuna orchidea registrata.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

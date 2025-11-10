@@ -1,0 +1,143 @@
+Prima di proseguire con la creazione di **form, view e template**,
+è fondamentale assicurarsi che la tua app Django sia
+ **ben configurata e integrata** nel progetto. 
+ Ecco una checklist dettagliata e ragionata per verificare tutti i file chiave:
+
+---
+
+## ✅ 1. `apps.py` (della tua app)
+
+### Verifica:
+- Il nome dell’app è corretto e coerente con `INSTALLED_APPS`.
+
+```python
+class YourAppNameConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'your_app_name'  # deve corrispondere al nome della cartella dell'app
+```
+
+---
+
+## ✅ 2. `settings.py` (del progetto)
+
+### Verifica:
+- La tua app è inclusa in `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'your_app_name',
+]
+```
+
+- Se usi immagini: assicurati che `MEDIA_URL` e `MEDIA_ROOT` siano definiti:
+
+```python
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+```
+
+- Se usi `ImageField`, verifica che Pillow sia installato:
+
+```bash
+pip install Pillow
+```
+
+---
+
+## ✅ 3. `urls.py` (del progetto)
+
+### Verifica:
+- La tua app ha un file `urls.py` e viene incluso nel progetto:
+
+```python
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('your_app_name.urls')),  # se hai definito urls.py nell'app
+]
+
+# Per servire immagini in sviluppo
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+---
+
+## ✅ 4. `urls.py` (della tua app)
+
+### Verifica:
+- Esiste e contiene almeno una view di test:
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),  # esempio
+]
+```
+
+---
+
+## ✅ 5. `views.py`
+
+### Verifica:
+- Hai almeno una view funzionante per testare il rendering:
+
+```python
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')
+```
+
+---
+
+## ✅ 6. `templates/`
+
+### Verifica:
+- Hai una cartella `templates` registrata in `settings.py`:
+
+```python
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [BASE_DIR / 'templates'],
+        ...
+    },
+]
+```
+
+- Hai almeno un file `home.html` per testare il rendering.
+
+---
+
+## ✅ 7. `forms.py` (se presente)
+
+### Verifica:
+- Se hai già creato form personalizzati, controlla che i campi corrispondano ai modelli.
+- Se non esiste, puoi iniziare a crearli dopo aver testato le view.
+
+---
+
+## ✅ 8. `admin.py`
+
+✅ Già verificato e ben strutturato!
+
+---
+
+## 🧪 Test finale consigliato
+
+- Avvia il server con `python manage.py runserver`
+- Vai su `/admin` e verifica che tutti i modelli siano accessibili
+- Vai su `/` (o altra view) e verifica che il template venga renderizzato
+- Prova a caricare un’immagine per testare `MEDIA_URL`
+
+---
+
+Vuoi che ti aiuti a creare una prima view narrativa per una pianta? Oppure un form per registrare un evento con suggerimenti dinamici?
