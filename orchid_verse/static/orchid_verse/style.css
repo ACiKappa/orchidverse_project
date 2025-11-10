@@ -1,4 +1,18 @@
 /* 🌸 Palette pastello */
+
+.site-logo {
+  height: 40px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .site-logo {
+    height: 30px;
+    margin-right: 5px;
+  }
+}
+
 body {
     background-color: #fdfdfb;
     color: #444;

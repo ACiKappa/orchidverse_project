@@ -6,6 +6,9 @@ from orchid_verse.models import Seller
 class Command(BaseCommand):
     help = 'Importa venditori da un file JSON'
 
+    def add_arguments(self, parser):
+        parser.add_argument('json_path', type=str, help='Percorso del file JSON')
+
     def handle(self, *args, **kwargs):
         file_path = os.path.join('orchid_verse', 'data', 'sellers.json')
 
@@ -21,6 +24,7 @@ class Command(BaseCommand):
             obj, was_created = Seller.objects.get_or_create(
                 name=entry['name'],
                 defaults={
+                    'owner': entry.get('owner', ''),
                     'email': entry.get('email', ''),
                     'website': entry.get('website', ''),
                     'phone': entry.get('phone', ''),
@@ -34,3 +38,9 @@ class Command(BaseCommand):
                 skipped += 1
 
         self.stdout.write(self.style.SUCCESS(f"{created} venditori importati. {skipped} già esistenti."))
+
+
+# python manage.py import_sellers data/sellers.json
+# Aggiungi validazione o logging
+# Usa update_or_create se vuoi aggiornare venditori esistenti
+# import_source se vuoi tracciare la provenienza

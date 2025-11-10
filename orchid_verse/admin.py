@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import (
+    SiteLogo,
     OrchidSpecies,
     Seller,
     OrchidPurchase,
@@ -7,6 +8,20 @@ from .models import (
     OrchidEvent
 )
 from django.utils.html import format_html
+
+
+@admin.register(SiteLogo)
+class SiteLogoAdmin(admin.ModelAdmin):
+    list_display = ('season', 'description', 'image_preview')
+    list_filter = ('season',)
+    search_fields = ('description',)
+
+    @admin.display(description="Anteprima")
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height:50px;">', obj.image.url)
+        return "Nessuna immagine"
+
 
 @admin.register(OrchidSpecies)
 class OrchidSpeciesAdmin(admin.ModelAdmin):

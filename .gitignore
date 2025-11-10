@@ -11,6 +11,7 @@ db.sqlite3
 /staticfiles/
 /media/
 *.log
+*.txt
 
 # VS Code
 .vscode/
@@ -18,3 +19,7 @@ db.sqlite3
 # Migrazioni (opzionale)
 **/migrations/*.py
 !**/migrations/__init__.py
+
+
+
+

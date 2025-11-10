@@ -135,6 +135,10 @@ class OrchidSpecies(models.Model):
     rest_temperature_max = models.FloatField(null=True, blank=True)
     notes = models.TextField(blank=True)
 
+    class Meta:
+        verbose_name = "Orchid species"
+        verbose_name_plural = "3. Orchid species"
+
     def __str__(self):
         return self.full_name()
 
@@ -151,6 +155,7 @@ class OrchidSpecies(models.Model):
             name += f" {self.variety}"
         return name
 
+
 class Seller(models.Model):
     '''
     Modello `Seller`: informazioni sul venditore.
@@ -163,6 +168,10 @@ class Seller(models.Model):
     phone = models.CharField(max_length=50, blank=True)
     address = models.TextField(blank=True)
     notes = models.TextField(blank=True)  # es. qualità, packaging, varietà disponibili
+
+    class Meta:
+        verbose_name = "Seller"
+        verbose_name_plural = "5. Sellers"
 
     def __str__(self):
         return self.name
@@ -195,6 +204,10 @@ class OrchidPurchase(models.Model):
     def __str__(self):
         count = self.cultivated_orchids.count()
         return f"Ordine di {count} piante, da {self.seller.name if self.seller else 'Venditore sconosciuto'} il {self.purchase_date}"
+
+    class Meta:
+        verbose_name = "Orchid purchase"
+        verbose_name_plural = "4. Orchid purchase"
 
 
 class CultivatedOrchid(models.Model):
@@ -293,6 +306,8 @@ class CultivatedOrchid(models.Model):
     
     class Meta:
         ordering = ['received_date']
+        verbose_name_plural = "2. Cultivated orchid"
+        
 
 class EventType(TextChoices):
     BLOOM = 'bloom', 'Fioritura'
@@ -322,6 +337,7 @@ class OrchidEvent(models.Model):
 
     class Meta:
         ordering = ['-date'] # mostra prima gli eventi piu recenti
+        verbose_name_plural = "1. Orchid event"
 
     def clean(self):
         if self.date > timezone.now().date():
@@ -330,3 +346,17 @@ class OrchidEvent(models.Model):
     def __str__(self):
         return f"{self.orchid} - {self.event_type} ({self.date})"
     
+
+class SiteLogo(models.Model):
+    SEASON_CHOICES = [
+        ('spring', 'Primavera'),
+        ('summer', 'Estate'),
+        ('autumn', 'Autunno'),
+        ('winter', 'Inverno'),
+    ]
+    season = models.CharField(max_length=10, choices=SEASON_CHOICES)
+    image = models.ImageField(upload_to='site_logos/')
+    description = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"{self.get_season_display()} logo"

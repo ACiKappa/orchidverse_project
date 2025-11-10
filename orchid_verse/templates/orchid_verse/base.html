@@ -2,13 +2,19 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}OrchidVerse{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'orchid_verse/style.css' %}">    
+    <meta charset="UTF-8">   <title>{% block title %}OrchidVerse{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'orchid_verse/style.css' %}">
 </head>
-<body>
+<body class="{{ logo.season }}">
     <header>
-        <h1>🌸 OrchidVerse</h1>
+        <h1>
+            {% if logo %}        
+            <img src="{{ logo.image.url }}" alt="{{ logo.description }}" class="site-logo">
+            {% else %}
+              <p>Nessun logo stagionale disponibile.</p>
+            {% endif %}
+            OrchidVerse
+        </h1>
         <nav>
             <a href="{% url 'home' %}">Home</a> |
             <a href="{% url 'orchid_list' %}">Le tue orchidee</a>

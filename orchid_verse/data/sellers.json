@@ -35,14 +35,14 @@
     "address": "Via Spalato 1, 21100 Varese, Italia",
     "notes": "Specializzata in orchidee tropicali botaniche e ibride. Serre tematiche, imballaggi sicuri, grande passione e competenza."
   },
-{
-  "name": "Schwerter Orchideenzucht",
-  "owner": "",
-  "email": "info@schwerter-orchideenzucht.de",
-  "website": "https://www.schwerter-orchideenzucht.de",
-  "phone": "+49 2304 75566",
-  "address": "Recklinghausen, Germania",
-  "notes": "Storico vivaio tedesco con ampio catalogo di orchidee botaniche e ibride. Spedizione internazionale, piante selezionate per vigore e adattabilità."
-}
+  {
+    "name": "Schwerter Orchideenzucht",
+    "owner": "",
+    "email": "info@schwerter-orchideenzucht.de",
+    "website": "https://www.schwerter-orchideenzucht.de",
+    "phone": "+49 2304 75566",
+    "address": "Recklinghausen, Germania",
+    "notes": "Storico vivaio tedesco con ampio catalogo di orchidee botaniche e ibride. Spedizione internazionale, piante selezionate per vigore e adattabilità."
+  }
 
 ]
