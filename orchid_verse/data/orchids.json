@@ -11,54 +11,24 @@
     "humidity": "moderata",
     "mounting": "montata su sughero",
     "rest_period": false,
-    "notes": "Colore intenso, fioritura elegante.",
+    "cultivation_notes": "Colore intenso, fioritura elegante.",
     "seller": "Nardotto e Capello"
   },
   {
-    "genus": "Aerides",
-    "species_name": "crassifolia",
-    "variety": "",
-    "hybrid_name": "",
-    "is_botanical": true,
-    "growth_type": "epifita",
-    "temperature": "intermedia-calda",
-    "light": "medio-alta",
-    "humidity": "moderata",
-    "mounting": "vaso con bark e perlite",
-    "rest_period": false,
-    "notes": "Originaria del Sudest asiatico. Fioritura profumata e racemi pendenti.",
-    "seller": "Schwerter Orchideenzucht"
-  },
-  {
-    "genus": "Bulbophyllum",
+    "genus": "Phalaenopsis",
     "species_name": "",
     "variety": "",
-    "hybrid_name": "frostii x lobbii 'Black'",
+    "hybrid_name": "Phalaenopsis equestris x violacea",
     "is_botanical": false,
     "growth_type": "epifita",
     "temperature": "intermedia-calda",
-    "light": "bassa-media",
-    "humidity": "alta",
+    "light": "media",
+    "humidity": "moderata",
     "mounting": "montata su sughero",
     "rest_period": false,
-    "notes": "Ibrido compatto con fiori scuri e profumati. Richiede umidità costante e luce filtrata.",
-    "seller": "Schwerter Orchideenzucht"
+    "cultivation_notes": "Ibrido primario con fiori profumati e colori vivaci. Unisce la fioritura ramificata di equestris con la fragranza tropicale di violacea. Coltivazione su sughero consigliata per buona aerazione.",
+    "seller": "OrchidGarden"
   },
-  {
-  "genus": "Phalaenopsis",
-  "species_name": "",
-  "variety": "",
-  "hybrid_name": "Phalaenopsis equestris x violacea",
-  "is_botanical": false,
-  "growth_type": "epifita",
-  "temperature": "intermedia-calda",
-  "light": "media",
-  "humidity": "moderata",
-  "mounting": "montata su sughero",
-  "rest_period": false,
-  "notes": "Ibrido primario con fiori profumati e colori vivaci. Unisce la fioritura ramificata di equestris con la fragranza tropicale di violacea. Coltivazione su sughero consigliata per buona aerazione.",
-  "seller": "OrchidGarden"
-},
   {
     "genus": "Phalaenopsis",
     "species_name": "",
@@ -71,8 +41,8 @@
     "humidity": "moderata",
     "mounting": "vaso con bark",
     "rest_period": false,
-    "notes": "Era di Stanka, ricevuta nel 2020.",
-    "seller": ""
+    "nickname": "bianchina doppia di Stanka",
+    "cultivation_notes": "Era di Stanka, ricevuta nel 2020."
   },
   {
     "genus": "Phalaenopsis",
@@ -86,8 +56,8 @@
     "humidity": "moderata",
     "mounting": "montata su sughero",
     "rest_period": false,
-    "notes": "Ricevuta nel 2018 quando mi sono trasferita da Lidia Corelli.",
-    "seller": ""
+    "nickname": "viola oscuro da Lidia Corelli",
+    "cultivation_notes": "Ricevuta nel 2018 quando mi sono trasferita da Lidia Corelli."
   },
   {
     "genus": "Phalaenopsis",
@@ -101,8 +71,8 @@
     "humidity": "moderata",
     "mounting": "montata su sughero",
     "rest_period": false,
-    "notes": "Era di Marina Radicella, ricevuta nel 2018.",
-    "seller": ""
+    "nickname": "viola a pois - Marina",
+    "cultivation_notes": "Era di Marina Radicella, ricevuta nel 2018."
   },
   {
     "genus": "Phalaenopsis",
@@ -116,10 +86,12 @@
     "humidity": "moderata",
     "mounting": "montata su sughero",
     "rest_period": false,
-    "notes": "Presa nel 2025 al Conad. Pianta vigorosa.",
-    "seller": ""
+    "nickname": "fucsia mini Conad",
+    "cultivation_notes": "Presa nel 2025 al Conad. Pianta vigorosa."
   },
   {
+    "seller": "Schwerter Orchideenzucht",
+    "purchase_date": "2023-01-01",
     "genus": "Tolumnia",
     "species_name": "scandens",
     "variety": "",
@@ -131,38 +103,69 @@
     "humidity": "moderata",
     "mounting": "montata su zughero orizzontale",
     "rest_period": false,
-    "notes": "Presa da Schwerter in due occasioni. (3) + (5) piante distinte.",
-    "seller": "Schwerter Orchideenzucht"
+    "cultivation_notes": "Presa da Schwerter in due occasioni. (3) + (5) piante distinte."
   },
   {
-    "genus": "Cattleya",
-    "species_name": "porphyglossa",
-    "variety": "",
-    "hybrid_name": "",
-    "is_botanical": true,
-    "growth_type": "epifita o litofita",
-    "temperature": "intermedia",
-    "light": "medio-alta",
-    "humidity": "alta",
-    "mounting": "vaso o zattera",
-    "rest_period": false,
-    "notes": "Originaria del Brasile. Fioritura primaverile-estiva con fiori profumati e petali bruno-violacei. Richiede umidità elevata e buona ventilazione.",
-    "seller": "Schwerter Orchideenzucht"
-  },
-  {
-    "genus": "Schomburgkia",
-    "species_name": "albopurpurea",
-    "variety": "",
-    "hybrid_name": "",
-    "is_botanical": true,
-    "growth_type": "epifita",
-    "temperature": "calda",
-    "light": "alta",
-    "humidity": "moderata",
-    "mounting": "zattera o vaso drenante",
-    "rest_period": false,
-    "notes": "Specie compatta con pseudobulbi cavi e fiori estivi bianchi con labello porpora. Ama luce intensa e asciugature tra un’annaffiatura e l’altra.",
-    "seller": "Schwerter Orchideenzucht"
+    "seller": "Schwerter Orchideenzucht",
+    "purchase_date": "2025-10-03",
+    "actual_total_price": 70.25,
+    "orchids": [
+      {
+        "genus": "Aerides",
+        "species_name": "crassifolia",
+        "variety": "",
+        "hybrid_name": "",
+        "is_botanical": true,
+        "growth_type": "epifita",
+        "temperature": "intermedia-calda",
+        "light": "medio-alta",
+        "humidity": "moderata",
+        "mounting": "vaso con bark e perlite",
+        "rest_period": false,
+        "botanical_notes": "Originaria del Sudest asiatico. Fioritura profumata e racemi pendenti."
+      },
+      {
+        "genus": "Bulbophyllum",
+        "species_name": "",
+        "variety": "",
+        "hybrid_name": "frostii x lobbii 'Black'",
+        "is_botanical": false,
+        "growth_type": "epifita",
+        "temperature": "intermedia-calda",
+        "light": "bassa-media",
+        "humidity": "alta",
+        "mounting": "montata su sughero",
+        "rest_period": false,
+        "botanical_notes": "Ibrido compatto con fiori scuri e profumati. Richiede umidità costante e luce filtrata."
+      },
+      {
+        "genus": "Cattleya",
+        "species_name": "porphyglossa",
+        "variety": "",
+        "hybrid_name": "",
+        "is_botanical": true,
+        "growth_type": "epifita o litofita",
+        "temperature": "intermedia",
+        "light": "medio-alta",
+        "humidity": "alta",
+        "mounting": "vaso o zattera",
+        "rest_period": false,
+        "botanical_notes": "Originaria del Brasile. Fioritura primaverile-estiva con fiori profumati e petali bruno-violacei. Richiede umidità elevata e buona ventilazione."
+      },
+      {
+        "genus": "Schomburgkia",
+        "species_name": "albopurpurea",
+        "variety": "",
+        "hybrid_name": "",
+        "is_botanical": true,
+        "growth_type": "epifita",
+        "temperature": "calda",
+        "light": "alta",
+        "humidity": "moderata",
+        "mounting": "zattera o vaso drenante",
+        "rest_period": false,
+        "botanical_notes": "Specie compatta con pseudobulbi cavi e fiori estivi bianchi con labello porpora. Ama luce intensa e asciugature tra un’annaffiatura e l’altra."
+      }
+    ]
   }
-
 ]

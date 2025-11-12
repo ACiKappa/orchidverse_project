@@ -1,5 +1,5 @@
-import json
 import os
+import json
 from django.core.management.base import BaseCommand
 from orchid_verse.models import Seller
 
@@ -7,7 +7,8 @@ class Command(BaseCommand):
     help = 'Importa venditori da un file JSON'
 
     def add_arguments(self, parser):
-        parser.add_argument('json_path', type=str, help='Percorso del file JSON')
+        parser.add_argument('json_path', type=str, 
+                            help='Percorso al file JSON da importare')
 
     def handle(self, *args, **kwargs):
         file_path = os.path.join('orchid_verse', 'data', 'sellers.json')
@@ -29,7 +30,7 @@ class Command(BaseCommand):
                     'website': entry.get('website', ''),
                     'phone': entry.get('phone', ''),
                     'address': entry.get('address', ''),
-                    'notes': entry.get('notes', '')
+                    'seller_notes': entry.get('seller_notes', '')
                 }
             )
             if was_created:

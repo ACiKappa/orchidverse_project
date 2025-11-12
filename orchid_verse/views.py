@@ -1,10 +1,16 @@
 from django.views.generic import ListView
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from .models import (
     SiteLogo, 
-    CultivatedOrchid
+    CultivatedOrchid,
+    OrchidEvent
 )
+from .forms import OrchidEventForm
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 from datetime import date
+
 
 
 # Create your views here.
@@ -32,11 +38,27 @@ class SeasonalLogoMixin:
 class HomeView(SeasonalLogoMixin, TemplateView):
     template_name = 'orchid_verse/home.html'
 
-
+# È una vista "normale" perché non richiede input da parte dell’utente.
 class CultivatedOrchidListView(SeasonalLogoMixin, ListView):
     model = CultivatedOrchid
     template_name = 'orchid_verse/orchid_list.html'
     context_object_name = 'orchids'
+
+
+# È una vista "normale" perché non richiede input da parte dell’utente.
+class OrchidEventListView(SeasonalLogoMixin, ListView):
+    model = OrchidEvent
+    template_name = 'orchid_verse/event_list.html'
+    context_object_name = 'events'
+
+
+class OrchidEventCreateView(SuccessMessageMixin, CreateView):
+    model = OrchidEvent
+    form_class = OrchidEventForm
+    template_name = 'orchid_verse/event_form.html'
+    success_url = reverse_lazy('event_list')  # o altro URL dopo il salvataggio
+    success_message = "Evento registrato con successo 🌸"
+
 
 
 # class OrchidDetailView(SeasonalLogoMixin, DetailView):

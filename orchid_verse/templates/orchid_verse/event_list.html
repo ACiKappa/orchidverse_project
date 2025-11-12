@@ -1,0 +1,19 @@
+{% extends 'orchid_verse/base.html' %}
+
+{% block title %}Le tue orchidee{% endblock %}
+
+{% block content %}
+<h2>Eventi delle Orchidee</h2>
+<ul>
+{% for event in events %}
+    <li>
+        {{ event.date }} - {{ event.event_type }} ({{ event.cultivated_orchid.name }})
+        {% if orchid.photo %}
+        <br><img src="{{ event.photo.url }}" alt="Foto" style="height: 150px;">
+        {% endif %}
+    </li>
+    {% empty %}
+    <li>Nessun evento registrato.</li>
+{% endfor %}
+</ul>
+{% endblock %}

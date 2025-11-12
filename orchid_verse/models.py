@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from decimal import Decimal
+from django.db.models import Sum
 from django.utils import timezone
 from django.db.models import TextChoices
 
@@ -133,7 +135,12 @@ class OrchidSpecies(models.Model):
     rest_period_end = models.CharField(max_length=20, blank=True)
     rest_temperature_min = models.FloatField(null=True, blank=True)
     rest_temperature_max = models.FloatField(null=True, blank=True)
-    notes = models.TextField(blank=True)
+    
+    # Chiarisce che sono note scientifiche
+    # Note botaniche generali sulla specie
+    # Esempio: “Fioritura primaverile, profumo intenso, originaria del Brasile”
+    botanical_notes = models.TextField(blank=True,
+                    verbose_name = 'Note botaniche generali sulla specie')
 
     class Meta:
         verbose_name = "Orchid species"
@@ -167,7 +174,8 @@ class Seller(models.Model):
     website = models.URLField(blank=True)
     phone = models.CharField(max_length=50, blank=True)
     address = models.TextField(blank=True)
-    notes = models.TextField(blank=True)  # es. qualità, packaging, varietà disponibili
+    seller_notes = models.TextField(blank=True,
+                verbose_name='es. qualità, packaging, varietà disponibili')  # es. qualità, packaging, varietà disponibili
 
     class Meta:
         verbose_name = "Seller"
@@ -189,7 +197,11 @@ class OrchidPurchase(models.Model):
     order_number = models.CharField(max_length=100, blank=True)
     # plant_photo = models.ImageField(upload_to='orchid_photos/', blank=True, null=True)
     receipt_photo = models.ImageField(upload_to='purchase_receipts/', blank=True, null=True)
-    additional_notes = models.TextField(blank=True)
+    # Evita confusione con altre note 
+    # note sull’acquisto
+    # Esempio: “Orchidee acquistate in fiera, prezzo scontato, spedizione inclusa”
+    purchase_notes = models.TextField(blank=True,
+                verbose_name='Note sull’acquisto')
 
     @property
     def total_price(self):
@@ -197,10 +209,21 @@ class OrchidPurchase(models.Model):
         Calcola il prezzo totale dell'ordine sommando 
         i prezzi individuali delle piante collegate.
         '''
-        from django.db.models import Sum
         result = self.cultivated_orchids.aggregate(Sum('purchase_price'))
-        return f"{result['purchase_price__sum'] or 0:.2f} €"
+        total = result['purchase_price__sum'] or Decimal('0.00')
+        return total
 
+    @property
+    def total_price_display(self):
+        return f"{self.total_price:.2f} €"
+
+    # Prezzo reale dell'intero acquisto (inclusi costi extra)
+    actual_total_price = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True,
+        verbose_name="Totale ordine",
+        help_text="Prezzo totale dell'acquisto, incluse tasse e trasporto"
+    )
+    
     def __str__(self):
         count = self.cultivated_orchids.count()
         return f"Ordine di {count} piante, da {self.seller.name if self.seller else 'Venditore sconosciuto'} il {self.purchase_date}"
@@ -251,7 +274,7 @@ class CultivatedOrchid(models.Model):
 
     origin_type = models.CharField(max_length=20, choices=ORIGIN_CHOICES, default='purchase')
     # purchase = models.ForeignKey(OrchidPurchase, on_delete=models.SET_NULL, null=True, blank=True)
-    received_from = models.CharField(max_length=100, blank=True)  # es. "Marina"
+    received_from = models.CharField(max_length=100, null=True, blank=True)  # es. "Marina"
     received_date = models.DateField(null=True, blank=True)
 
     # Posizione e ambiente
@@ -287,7 +310,11 @@ class CultivatedOrchid(models.Model):
     )
 
     # Note generali
-    notes = models.TextField(blank=True)
+    # Note personali sulla pianta coltivata
+    # Esempio: “Ricevuta da Lidia nel 2018, montata su sughero, fiorisce ogni ottobre”
+    cultivation_notes = models.TextField(blank=True,
+    verbose_name = "Note sulla coltivazione")
+
 
     
     # Django chiama clean() solo quando usi ModelForm o full_clean() manualmente.
@@ -360,3 +387,27 @@ class SiteLogo(models.Model):
 
     def __str__(self):
         return f"{self.get_season_display()} logo"
+
+
+### Distinguere tra l'acquisto e l'origine della pianta #######
+# Mantieni origin_type in CultivatedOrchid. 
+# È il posto giusto per raccontare la storia della pianta, 
+# indipendentemente dal fatto che sia stata acquistata o no.
+
+# Svantaggi se sposti origin_type in OrchidPurchase
+# Ambiguità: un acquisto con origin_type = 'gift' sarebbe semanticamente confuso.
+# Duplicazione: dovresti creare OrchidPurchase anche per piante ricevute, ma senza seller, order_number, ecc.
+# Complicazione logica: dovresti validare che seller sia obbligatorio solo se origin_type = 'purchase'.
+
+# Vantaggi nel mantenere origin_type in CultivatedOrchid
+# Flessibilità: puoi avere piante con o senza OrchidPurchase, ma sempre con un origin_type.
+# Chiarezza semantica: OrchidPurchase è solo per acquisti. Non si contamina con regali o scambi.
+# Espandibilità: puoi aggiungere altri tipi di origine (es. “coltivata da seme”) senza toccare il modello degli acquisti.
+                                                      
+# Puoi pensare a OrchidPurchase come a un documento contabile, 
+# e CultivatedOrchid come alla scheda narrativa della pianta.
+
+# Da fare:
+# creare una vista admin o un filtro che 
+# evidenzi le piante ricevute, scambiate o con origine sconosciuta
+# Potrebbe aiutarti a tenere traccia narrativa e scientifica.

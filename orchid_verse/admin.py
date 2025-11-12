@@ -54,7 +54,7 @@ class OrchidSpeciesAdmin(admin.ModelAdmin):
             )
         }),
         ('Note', {
-            'fields': ('notes',)
+            'fields': ('botanical_notes',)
         }),
     )
 
@@ -73,7 +73,7 @@ class SellerAdmin(admin.ModelAdmin):
             'fields': ('email', 'phone', 'website', 'address')
         }),
         ('Note e impressioni', {
-            'fields': ('notes',)
+            'fields': ('seller_notes',)
         }),
     )
 
@@ -88,7 +88,9 @@ class CultivatedOrchidInline(admin.TabularInline):
 
 @admin.register(OrchidPurchase)
 class OrchidPurchaseAdmin(admin.ModelAdmin):
-    list_display = ['purchase_date', 'seller', 'order_number', 'total_price_display']
+    list_display = ['purchase_date', 'seller', 
+                    'order_number', 'total_price_display', 
+                    'actual_total_price', 'purchase_notes']
     list_filter = ['purchase_date', 'seller']
     search_fields = ['order_number', 'seller__name']
     inlines = [CultivatedOrchidInline]
@@ -167,7 +169,7 @@ class CultivatedOrchidAdmin(admin.ModelAdmin):
             'fields': ('last_watered',)
         }),
         ('Note', {
-            'fields': ('notes',)
+            'fields': ('cultivation_notes',)
         }),
     )
 
