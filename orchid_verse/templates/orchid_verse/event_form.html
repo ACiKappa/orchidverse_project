@@ -1,7 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'orchid_verse/base.html' %}
 {% load static %}
+
+{% block title %}Registra evento botanico{% endblock %}
+
 {% block content %}
-  <h2>Registra un nuovo evento botanico</h2>
+  <h2>📷 Registra un nuovo evento botanico</h2>
+
+  <p class="form-hint">
+    Documenta fioriture, rinvasi, problemi, o momenti delicati come <strong>declino</strong> o <strong>morte</strong> della pianta.
+  </p>
 
   {% if messages %}
     <ul class="messages">
@@ -14,6 +21,15 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Salva evento</button>
+  
+    <button type="submit" class="btn-photo">
+      <span class="click-icon">📸</span> 
+      <span class="click-text">Salva evento</span>
+    </button>
   </form>
+
+  <p class="back-link">
+    <a href="{% url 'event_list' %}">← Torna al diario</a>
+  </p>
+  
 {% endblock %}

@@ -50,9 +50,9 @@ class OrchidEventListView(SeasonalLogoMixin, ListView):
     model = OrchidEvent
     template_name = 'orchid_verse/event_list.html'
     context_object_name = 'events'
+    ordering = ['-date']
 
-
-class OrchidEventCreateView(SuccessMessageMixin, CreateView):
+class OrchidEventCreateView(SeasonalLogoMixin, SuccessMessageMixin, CreateView):
     model = OrchidEvent
     form_class = OrchidEventForm
     template_name = 'orchid_verse/event_form.html'

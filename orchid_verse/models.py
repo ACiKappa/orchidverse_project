@@ -343,7 +343,9 @@ class EventType(TextChoices):
     REPOTTING = 'repotting', 'Rinvaso'
     DIVISION = 'division', 'Divisione'
     MOUNTING = 'mounting', 'Nuova zattera'
-    PROBLEM = 'problem', 'Problema'
+    PROBLEM = 'problem', 'Problema - In recupero'
+    DECLINE = 'decline', 'Moribonda'
+    DEATH = 'death', 'Aldilà'
     OTHER = 'other', 'Altro'
 
 class OrchidEvent(models.Model):

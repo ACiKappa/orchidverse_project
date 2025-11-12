@@ -4,11 +4,17 @@
 
 {% block content %}
 <h2>Eventi delle Orchidee</h2>
+
+<p>
+  <a href="{% url 'event_create' %}" class="btn btn-primary">➕ Registra nuovo evento</a>
+</p>
+
 <ul>
 {% for event in events %}
     <li>
-        {{ event.date }} - {{ event.event_type }} ({{ event.cultivated_orchid.name }})
-        {% if orchid.photo %}
+        {{ event.date }} - {{ event.event_type }} ({{ event.orchid }})
+
+        {% if event.photo %}
         <br><img src="{{ event.photo.url }}" alt="Foto" style="height: 150px;">
         {% endif %}
     </li>

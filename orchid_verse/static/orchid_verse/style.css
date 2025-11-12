@@ -81,3 +81,47 @@ img {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
+
+
+.event-form {
+  margin-top: 1em;
+}
+
+.btn-photo {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: 'Courier New', monospace;
+  border: none;
+}
+
+.btn-photo:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+.click-icon {
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.click-text {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.form-hint {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.back-link {
+  margin-top: 2em;
+  font-size: 0.9em;
+}

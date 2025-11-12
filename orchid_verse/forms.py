@@ -39,7 +39,8 @@ class OrchidPurchaseForm(forms.ModelForm):
 class OrchidEventForm(forms.ModelForm):
     class Meta:
         model = OrchidEvent
-        fields = ['orchid', 'photo', 'date', 'event_type', 'description']
+        fields = ['orchid', 'photo', 'date', 
+                  'event_type', 'description']
         widgets = {
             'orchid': forms.Select(attrs={
                 'class': 'form-control',
@@ -65,4 +66,4 @@ class OrchidEventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['orchid'].queryset = CultivatedOrchid.objects.order_by('name')
+        self.fields['orchid'].queryset = CultivatedOrchid.objects.order_by('nickname','species__genus')
