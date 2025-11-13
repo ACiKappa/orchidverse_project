@@ -1,12 +1,17 @@
-
-from django.urls import path
 #from django.views.generic import TemplateView
-from django.urls import path
+from rest_framework.routers import DefaultRouter
+from django.urls import path, include
+
 from .views import (
     HomeView,
     CultivatedOrchidListView,
     OrchidEventListView,
-    OrchidEventCreateView)
+    OrchidEventCreateView,
+)
+from .views import (
+    api_orchidee_per_genere,
+    OrchidPurchaseViewSet,
+)
 
 urlpatterns = [
    # path('', TemplateView.as_view(template_name='orchid_verse/home.html'), name='home'),
@@ -16,6 +21,14 @@ urlpatterns = [
     path('eventi/nuovo/', OrchidEventCreateView.as_view(), name='event_create'),
 ]
 
+# API
+urlpatterns += [
+    path('api/orchidee/genere/', api_orchidee_per_genere, name='api_orchidee_per_genere'),
+    ]
 
-
-
+# API REST
+router = DefaultRouter()
+router.register(r'acquisti', OrchidPurchaseViewSet, basename='acquisto')
+urlpatterns += [
+    path('api/', include(router.urls)),
+]

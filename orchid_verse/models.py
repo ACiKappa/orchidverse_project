@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from decimal import Decimal
 from django.db.models import Sum
+from decimal import Decimal
 from django.utils import timezone
 from django.db.models import TextChoices
 
@@ -220,7 +220,7 @@ class OrchidPurchase(models.Model):
     # Prezzo reale dell'intero acquisto (inclusi costi extra)
     actual_total_price = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=True,
-        verbose_name="Totale ordine",
+        verbose_name="Totale + costi extra",
         help_text="Prezzo totale dell'acquisto, incluse tasse e trasporto"
     )
     
@@ -265,6 +265,24 @@ class CultivatedOrchid(models.Model):
         default='unknown'
     )
      
+    def calculate_identification_level(self):
+        if not self.species:
+            return "unknown"
+        genus = (self.species.genus or "").strip()
+        species_name = (self.species.species_name or "").strip()
+        variety = (self.species.variety or "").strip()
+        hybrid_name = (self.species.hybrid_name or "").strip()
+
+        if genus and (species_name or variety or hybrid_name):
+            return "full"
+        elif genus:
+            return "partial"
+        return "unknown"
+
+    def save(self, *args, **kwargs):
+        self.identification_level = self.calculate_identification_level()
+        super().save(*args, **kwargs)
+
     ORIGIN_CHOICES = [
         ('purchase', 'Acquisto'),
         ('gift', 'Regalo'),
@@ -388,7 +406,8 @@ class SiteLogo(models.Model):
     description = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return f"{self.get_season_display()} logo"
+        return f"{self.get_season_display()} logo"  # type: ignore
+
 
 
 ### Distinguere tra l'acquisto e l'origine della pianta #######
